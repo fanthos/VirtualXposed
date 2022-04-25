@@ -9,7 +9,7 @@ import android.os.RemoteException;
 
 import com.lody.virtual.client.core.VirtualCore;
 import com.lody.virtual.client.env.VirtualRuntime;
-import com.lody.virtual.remote.VParceledListSlice;
+import com.lody.virtual.helper.compat.ParceledListSliceCompat;
 import com.lody.virtual.server.IJobScheduler;
 
 /**
@@ -50,9 +50,9 @@ public class VJobScheduler {
         }
     }
 
-    public VParceledListSlice<JobInfo> getAllPendingJobs() {
+    public Object getAllPendingJobs() {
         try {
-            return new VParceledListSlice<JobInfo>(getRemote().getAllPendingJobs());
+            return ParceledListSliceCompat.create(getRemote().getAllPendingJobs());
         } catch (RemoteException e) {
             return VirtualRuntime.crash(e);
         }

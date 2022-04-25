@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.util.Log;
 
 import com.lody.virtual.client.VClientImpl;
 import com.lody.virtual.client.core.VirtualCore;
@@ -14,6 +13,7 @@ import com.lody.virtual.client.hook.base.Inject;
 import com.lody.virtual.client.hook.base.MethodProxy;
 import com.lody.virtual.client.hook.base.ReplaceCallingPkgMethodProxy;
 import com.lody.virtual.client.hook.base.ReplaceLastPkgMethodProxy;
+import com.lody.virtual.client.hook.base.ReplaceSpecPkgMethodProxy;
 
 import java.lang.reflect.Method;
 
@@ -60,6 +60,7 @@ public class TelephonyStub extends BinderInvocationProxy {
 		addMethodProxy(new ReplaceCallingPkgMethodProxy("getMergedSubscriberIds"));
 		addMethodProxy(new ReplaceLastPkgMethodProxy("getRadioAccessFamily"));
 		addMethodProxy(new ReplaceCallingPkgMethodProxy("isVideoCallingEnabled"));
+		addMethodProxy(new ReplaceSpecPkgMethodProxy("getCallStateForSubscription", 1));
 
 		addMethodProxy(new MethodProxy() {
 
